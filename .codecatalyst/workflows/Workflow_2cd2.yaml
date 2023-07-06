@@ -64,9 +64,9 @@ Actions:
         - Run: echo "<testsuite tests=\"1\" name=\"TestAgentJunit\" >" >> report.xml
         - Run: echo "<testcase classname=\"TestAgentJunit\" name=\"Dummy
             Test\"/></testsuite>" >> report.xml
-  DeploytoAWSAmplifyHosting_79:
+  DeploywithAWSSAM_f2:
     # Identifies the action. Do not modify this value.
-    Identifier: codecatalyst-labs/deploy-to-amplify-hosting@v1.0.1
+    Identifier: codecatalyst-labs/deploy-with-sam@v1.0.1
     # Required; You can use an environment, AWS account connection, and role to access AWS resources.
     Environment:
       Connections:
@@ -75,17 +75,15 @@ Actions:
       Name: development
     # Specifies the source and/or artifacts to pass to the action as input.
     Inputs:
-      # Optional
+      # Required
       Sources:
         - WorkflowSource # This specifies that the action requires this Workflow as a source
     Compute:
-      Type: EC2
+      Type: EC2 # Defines the action's properties.
     Configuration:
-      Wait: true
-      AWSRegion: us-east-2
-      CreateBranch: true
-      AmplifyBranchName: ${WorkflowSource.BranchName}
-      Path: .
+      StackName: tester
+      FailOnEmptyChangeset: false
+      Capabilities: CAPABILITY_IAM
     DependsOn:
-      - Test_49
       - Build_cd
+      - Test_49
