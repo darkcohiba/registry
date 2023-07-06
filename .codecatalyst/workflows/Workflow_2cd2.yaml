@@ -78,14 +78,15 @@ Actions:
       # Optional
       Sources:
         - WorkflowSource # This specifies that the action requires this Workflow as a source
+      Variables:
+        - Name: stack-id
+          Value: arn:aws:amplify:us-west-2:164441545219:apps/d18bd5vu31y0au
     Compute:
       Type: EC2
     Configuration:
       Wait: true
-      AppStackName: registry062123
       CreateBranch: true
       AmplifyBranchName: ${WorkflowSource.BranchName}
       Path: .
     DependsOn:
-      - Test_49
       - Build_cd
