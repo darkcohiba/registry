@@ -82,6 +82,7 @@ Actions:
       Type: EC2
     Configuration:
       Wait: true
+      AWSRegion: us-east-2
       CreateBranch: true
       AmplifyBranchName: ${WorkflowSource.BranchName}
       Path: .
